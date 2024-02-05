@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'quiz/results.css' %}">
+    <meta charset="UTF-8">
+    <title>Results</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .full_container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        .results_title {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .correct_to_total {
+            color: #555;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .accuracy_good, .accuracy_bad {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        .accuracy_good {
+            color: #4CAF50;
+        }
+
+        .accuracy_bad {
+            color: #f44336;
+        }
+
+        .home_button, .try_again_button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .home_button {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        .try_again_button {
+            background-color: #ffc107;
+            color: #333;
+        }
+
+        .home_button:hover, .try_again_button:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="full_container">
+        <h1 class="results_title">Results</h1>
+        <p class="correct_to_total">{{ num_correct }}/{{ total_questions }}</p>
+
+        {% if accuracy_over_75 %}
+            <p class="accuracy_good">{{ accuracy_formatted }}</p>
+        {% else %}
+            <p class="accuracy_bad">{{ accuracy_formatted }}</p>
+        {% endif %}
+
+        <a class="home_button" href="{% url 'quiz:index' %}">Home</a>
+        <a class="try_again_button" href="{% url 'quiz:single_quiz' quiz.id %}">Try Again</a>
+    </div>
+</body>
+</html>

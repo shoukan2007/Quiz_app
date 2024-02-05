@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'quiz/single_quiz.css' %}">
+
+    <meta charset="UTF-8">
+    <title>Single Quiz</title>
+    <style>
+      body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 5;
+            padding: 5;
+        }
+
+        .full_container {
+            text-align: center;
+            padding: 51px;
+        }
+
+        .quiz_title {
+            font-size: 40px;
+            margin: 10px 0;
+            color: #007BF; /* Yangi matn rangi */
+        }
+
+        .num_questions {
+            font-size: 5px;
+            margin-top: 10px;
+            color: #495057; /* Yangi matn rangi */
+        }
+
+        .home_button {
+            display: inline-block; /* Display as inline block */
+            background-color: #007BF; /* Background color */
+            color: #fff; /* Text color */
+            padding: 20px 50px; /* Padding */
+            text-decoration: none; /* Remove underline from link */
+            font-size: 15px; /* Font size */
+            margin-top: 10px; /* Top margin */
+            border-radius: 6px; /* Border radius */
+            transition: background-color 0.3s ease; /* Transition effect for background color */
+            border: 2px solid #007BFF; /* Added border */
+        }
+
+        .home_button:hover {
+            background-color: #0056b3;
+            border-color: #0056b3; /* Change border color on hover */
+        }
+    </style>
+</head>
+<body>
+
+<div class="full_container">
+
+    <h1 class="quiz_title">{{ quiz.quiz_title }}</h1>
+
+    <h4 class="num_questions">{{ num_questions }} Questions</h4>
+
+    <a class="home_button" href="{% url 'quiz:single_question' quiz.id 1 %}">Start Quiz</a>
+    <br>
+    <br>
+    <br>
+    <a class="home_button" href="{% url 'quiz:index' %}">Home</a>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'quiz/create_quiz.css' %}">
+
+    <meta charset="UTF-8">
+    <title>Create Quiz</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .form_wrapper {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .form_name {
+            font-size: 36px;
+            margin: 10px 0;
+            color: #007BFF;
+        }
+
+        .error_text {
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+
+        .quiz_name_wrapper,
+        .num_questions_wrapper {
+            margin-bottom: 20px;
+        }
+
+        .quiz_name_label,
+        .num_questions_label {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        .submit_button {
+            display: inline-block;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 18px;
+            margin-top: 20px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit_button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="form_wrapper">
+    <h1 class="form_name">Create Quiz</h1>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="error_text">
+            {{ form.non_field_errors }}
+        </div>
+
+        <div class="quiz_name_wrapper">
+            {{ form.quiz_name.errors }}
+            <label class="quiz_name_label" for="{{ form.quiz_name.id_for_label }}">Quiz Name: </label>
+            {{ form.quiz_name }}
+        </div>
+
+        <div class="num_questions_wrapper">
+            <div class="error_text">
+                {{ form.num_questions.errors }}
+            </div>
+
+            <label class="num_questions_label" for="{{ form.num_questions.id_for_label }}">Number of Questions: </label>
+            {{ form.num_questions }}
+        </div>
+
+        <input class="submit_button" type="submit" value="Next">
+    </form>
+</div>
+
+</body>
+</html>

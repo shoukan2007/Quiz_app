@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'quiz/index.css' %}">
+
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 6;
+            padding: 4;
+        }
+
+        .area {
+            position: relative;
+            text-align: center;
+        }
+
+        .circles {
+            list-style: none;
+            padding: 5;
+            margin: 5;
+        }
+
+        .circles li {
+            background: #007BFF;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 5px;
+            animation: animate 1.5s linear infinite;
+        }
+
+        @keyframes animate {
+            0%, 100% {
+                transform: scale(0.75);
+            }
+            50% {
+                transform: scale(1.25);
+            }
+        }
+
+        .top_container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+        }
+
+        .site_title {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        .site_description {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .create_quiz {
+            display: inline-block;
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .create_quiz:hover {
+            background-color: #218838;
+        }
+
+        .card_container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            margin: 20px;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .quiz_title {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .num_questions {
+            font-size: 16px;
+            margin-top: 10px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="area" >
+            <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+            </ul>
+
+        <div class="top_container">
+            <h1 class="site_title">Quiz Site</h1>
+            <p class="site_description">Take a quiz or create your own!</p>
+            <a class="create_quiz" href="{% url 'quiz:create_quiz' %}">CREATE QUIZ</a>
+        </div>
+
+        {% if all_quiz_list %}
+
+            <section class="card_container">
+
+                    {% for quiz in all_quiz_list %}
+                        <a class="card" href="{% url 'quiz:single_quiz' quiz.id %}">
+                            <h3 class="quiz_title">{{ quiz.quiz_title }}</h3>
+                            <h6 class="num_questions">{{ quiz.num_questions }} Questions</h6>
+                        </a>
+
+                    {% endfor %}
+            </section>
+
+
+
+        {% else %}
+            <p>No quizzes are available.</p>
+        {% endif %}
+
+        <br>
+        <br>
+        <br>
+
+    </div>
+
+
+</body>
+</html>
